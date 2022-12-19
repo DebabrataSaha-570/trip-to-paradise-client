@@ -1,9 +1,10 @@
 import React from "react";
+import Navigation from "../Shared/Navigation/Navigation";
 
 const ManageOrders = () => {
   return (
     <div>
-      <h3>This is manage orders component</h3>
+      <Navigation></Navigation>
     </div>
   );
 };
