@@ -9,7 +9,7 @@ import ContactUs from "./Pages/ContactUs/ContactUs";
 
 function App() {
   return (
-    <div>
+    <div className="">
       <Routes>
         <Route path="/" element={<Home></Home>}></Route>
         <Route path="/home" element={<Home></Home>}></Route>

@@ -16,7 +16,7 @@ const Navigation = () => {
   };
   return (
     <>
-      <div className="bg-[#2A2A2A]">
+      <div className="bg-[#2A2A2A] sticky top-0 ">
         <nav className="relative max-w-7xl mx-auto  px-4 py-3 flex justify-between items-center ">
           {/* logo  */}
           <Link
@@ -120,7 +120,7 @@ const Navigation = () => {
       </div>
 
       {/* mobile menu  */}
-      <div className={!nav ? "hidden" : " lg:hidden"}>
+      <div className={!nav ? "hidden sticky top-0 z-70" : " lg:hidden"}>
         <div className="navbar-backdrop fixed inset-0 bg-gray-800 opacity-25"></div>
         <nav className="fixed top-0 left-0 bottom-0 flex flex-col w-5/6 max-w-sm py-6 px-6 bg-[#2A2A2A] border-r overflow-y-auto">
           <div className="flex items-center mb-8">
