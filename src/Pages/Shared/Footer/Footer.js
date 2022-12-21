@@ -100,7 +100,7 @@ const Footer = () => {
         {/* copy right */}
         <section className="max-w-7xl mx-auto px-10 md:px-10 lg:px-0">
           <hr />
-          <div className="text-gray-200 flex-col md:flex-row justify-between pt-6 pb-10 space-y-4 md:space-y-0">
+          <div className="text-gray-200 flex flex-col md:flex-row justify-between pt-6 pb-10 space-y-4 md:space-y-0">
             <p>
               Copyright &copy; 2023
               <span className="text-[#C29D59]"> Debabrata Saha. </span> All
