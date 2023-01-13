@@ -1,8 +1,47 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import Footer from "../Shared/Footer/Footer";
 import Navigation from "../Shared/Navigation/Navigation";
 
 const AddService = () => {
+  const [placeName, setPlaceName] = useState("");
+  const [placeDescription, setPlaceDescription] = useState("");
+  const [placeDuration, setPlaceDuration] = useState(0);
+  const [price, setPrice] = useState(0);
+  const [dressCode, setDressCode] = useState("");
+  const [image, setImage] = useState(null);
+
+  const handleAddService = (e) => {
+    e.preventDefault();
+
+    if (!image) {
+      return alert("Vai image Insert kor age, tarpor kotha bol!!");
+    }
+
+    const formData = new FormData();
+    formData.append("placeName", placeName);
+    formData.append("placeDescription", placeDescription);
+    formData.append("placeDuration", placeDuration);
+    formData.append("price", price);
+    formData.append("dressCode", dressCode);
+    formData.append("status", "pending");
+    formData.append("image", image);
+
+    fetch("http://localhost:5005/services", {
+      method: "POST",
+      body: formData,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.insertedId) {
+          alert("Service added successfully");
+          e.target.reset();
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
+
   return (
     <>
       <Navigation></Navigation>
@@ -10,7 +49,8 @@ const AddService = () => {
       <div className="max-w-2xl mx-auto bg-white   my-3">
         <div className="bg-[#F3F4F6] p-16">
           <h3 className="text-center text-2xl mb-3">Please Add a Service</h3>
-          <form>
+
+          <form onSubmit={handleAddService}>
             <div className="grid gap-6 mb-6 lg:grid-cols-1">
               {/* place name input */}
               <div>
@@ -23,6 +63,7 @@ const AddService = () => {
                 <input
                   type="text"
                   id="place_name"
+                  onChange={(e) => setPlaceName(e.target.value)}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="New York"
                   required
@@ -39,6 +80,7 @@ const AddService = () => {
                 </label>
                 <textarea
                   id="place_description"
+                  onChange={(e) => setPlaceDescription(e.target.value)}
                   rows="4"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="Description.."
@@ -57,6 +99,7 @@ const AddService = () => {
                 <input
                   type="number"
                   id="duration"
+                  onChange={(e) => setPlaceDuration(e.target.value)}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="3 days"
                   required
@@ -74,6 +117,7 @@ const AddService = () => {
                 <input
                   type="number"
                   id="price"
+                  onChange={(e) => setPrice(e.target.value)}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="$500"
                   required
@@ -91,6 +135,7 @@ const AddService = () => {
                 <input
                   type="text"
                   id="dress_code"
+                  onChange={(e) => setDressCode(e.target.value)}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="Comfortable dress"
                   required
@@ -108,6 +153,8 @@ const AddService = () => {
                 <input
                   id="file_input"
                   type="file"
+                  accept="image/*"
+                  onChange={(e) => setImage(e.target.files[0])}
                   className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 file:bg-[#1F2937] file:text-sm file:font-semibold file:text-gray-200 file:px-4 file:py-2 file:mr-5 file:cursor-pointer file:border-0 file:border-gray-300  "
                 />
               </div>

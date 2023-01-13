@@ -6,9 +6,9 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
-import image1 from "../../../Images/image-1.jpg";
-import image2 from "../../../Images/image-2.jpg";
-import image3 from "../../../Images/image-3.jpg";
+import image1 from "../../../Images/image-1-edit-1.jpg";
+import image2 from "../../../Images/image-2-edit-1.jpg";
+import image3 from "../../../Images/image-3-edit-1.jpg";
 
 // import required modules
 import { Autoplay, Pagination, Navigation } from "swiper";
