@@ -6,6 +6,7 @@ import MyOrders from "./Pages/MyOrders/MyOrders";
 import ManageOrders from "./Pages/ManageOrders/ManageOrders";
 import AddService from "./Pages/AddService/AddService";
 import ContactUs from "./Pages/ContactUs/ContactUs";
+import ServiceDetail from "./Pages/ServiceDetail/ServiceDetail";
 
 function App() {
   return (
@@ -19,6 +20,10 @@ function App() {
           element={<ManageOrders></ManageOrders>}
         ></Route>
         <Route path="/addService" element={<AddService></AddService>}></Route>
+        <Route
+          path="/serviceDetail/:id"
+          element={<ServiceDetail></ServiceDetail>}
+        ></Route>
         <Route path="/contactUs" element={<ContactUs></ContactUs>}></Route>
         <Route path="*" element={<NotFound></NotFound>}></Route>
       </Routes>

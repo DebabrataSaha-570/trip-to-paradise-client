@@ -4,7 +4,8 @@ import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 
 const SingleServices = ({ service }) => {
-  const { placeName, placeDescription, price, image } = service;
+  const { placeName, placeDescription, price, image, _id } = service;
+  console.log("service", service);
   return (
     <div>
       <div className="bg-white shadow-lg border border-gray-200 rounded-lg max-w-sm dark:bg-gray-800 dark:border-gray-700">
@@ -27,7 +28,7 @@ const SingleServices = ({ service }) => {
             <h2 className="text-xl font-bold">${price}</h2>
 
             <Link
-              to="/"
+              to={`/serviceDetail/${_id}`}
               className="text-white bg-[#c29d59] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm  p-3  text-center inline-flex items-center  dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             >
               Book Now
