@@ -1,6 +1,8 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import Footer from "../Shared/Footer/Footer";
 import Navigation from "../Shared/Navigation/Navigation";
+
+const imageHostKey = process.env.REACT_APP_imgbb_key;
 
 const AddService = () => {
   const [placeName, setPlaceName] = useState("");
@@ -14,31 +16,50 @@ const AddService = () => {
     e.preventDefault();
 
     if (!image) {
-      return alert("Vai image Insert kor age, tarpor kotha bol!!");
+      return alert("Please insert an image!!");
     }
-
     const formData = new FormData();
-    formData.append("placeName", placeName);
-    formData.append("placeDescription", placeDescription);
-    formData.append("placeDuration", placeDuration);
-    formData.append("price", price);
-    formData.append("dressCode", dressCode);
-    formData.append("status", "pending");
     formData.append("image", image);
 
-    fetch("http://localhost:5005/services", {
+    const url = `https://api.imgbb.com/1/upload?expiration=600&key=${imageHostKey}`;
+    fetch(url, {
       method: "POST",
       body: formData,
     })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.insertedId) {
-          alert("Service added successfully");
-          e.target.reset();
+      .then((res) => res.json())
+      .then((imgData) => {
+        if (imgData.success) {
+          console.log(imgData.data.url);
+          const data = {
+            placeName,
+            placeDescription,
+            placeDuration,
+            price,
+            dressCode,
+            status: "pending",
+            image: imgData.data.url,
+          };
+
+          fetch("http://localhost:5005/services", {
+            method: "POST",
+            body: JSON.stringify(data),
+            headers: {
+              "content-type": "application/json",
+            },
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              if (data.insertedId) {
+                alert("Service added successfully");
+                e.target.reset();
+              }
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        } else {
+          console.log("imgbb image couldnt upload");
         }
-      })
-      .catch((error) => {
-        console.error("Error:", error);
       });
   };
 
@@ -155,6 +176,7 @@ const AddService = () => {
                   type="file"
                   accept="image/*"
                   onChange={(e) => setImage(e.target.files[0])}
+                  // onChange={handleImageChange}
                   className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 file:bg-[#1F2937] file:text-sm file:font-semibold file:text-gray-200 file:px-4 file:py-2 file:mr-5 file:cursor-pointer file:border-0 file:border-gray-300  "
                 />
               </div>

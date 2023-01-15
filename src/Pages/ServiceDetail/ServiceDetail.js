@@ -8,17 +8,33 @@ import Navigation from "../Shared/Navigation/Navigation";
 const ServiceDetail = () => {
   const { id } = useParams();
   const [service, setService] = useState({});
-  const [userName, setUserName] = useState("");
-  const [userEmail, setUserEmail] = useState("");
+  const [user, setUser] = useState({
+    name: "Debabrata Saha",
+    email: "sahadebabrata570@gmail.com",
+  });
   const [userPhone, setUserPhone] = useState(0);
   const [userTicketNumber, setUserTicketNumber] = useState(0);
-  const [startDate, setStartDate] = useState(new Date());
+  const [bookingDate, setBookingDate] = useState(new Date());
 
   useEffect(() => {
     fetch(`http://localhost:5005/service/${id}`)
       .then((res) => res.json())
       .then((data) => setService(data));
   }, []);
+
+  const handleNameChange = (e) => {
+    const updatedName = e.target.value;
+    const updatedUser = { ...user };
+    updatedUser.name = updatedName;
+    setUser(updatedUser);
+  };
+
+  const handleEmailChange = (e) => {
+    const updatedEmail = e.target.value;
+    const updatedUser = { ...user };
+    updatedUser.email = updatedEmail;
+    setUser(updatedUser);
+  };
 
   const {
     placeName,
@@ -27,7 +43,35 @@ const ServiceDetail = () => {
     price,
     placeDuration,
     dressCode,
+    status,
   } = service;
+
+  const handleBookNow = (e) => {
+    e.preventDefault();
+
+    const booking = {
+      userName: user.name,
+      userEmail: user.email,
+      userPhone,
+      userTicketNumber,
+      bookingDate,
+      status,
+      service,
+    };
+
+    fetch("http://localhost:5005/booking", {
+      method: "POST",
+      body: JSON.stringify(booking),
+      headers: {
+        "content-type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      });
+  };
+
   return (
     <div>
       <Navigation></Navigation>
@@ -36,7 +80,7 @@ const ServiceDetail = () => {
           {/* service detail */}
           <div>
             <div>
-              <img src={`data:image/png;base64,${image}`} alt="service_image" />
+              <img src={image} alt="service_image" />
             </div>
 
             <h2 className="text-3xl  my-3"> {placeName} </h2>
@@ -66,7 +110,7 @@ const ServiceDetail = () => {
               Book This Tour
             </h3>
 
-            <form onSubmit="">
+            <form onSubmit={handleBookNow}>
               {/* user name input */}
               <div>
                 <label
@@ -78,8 +122,8 @@ const ServiceDetail = () => {
                 <input
                   type="text"
                   id="user_name"
-                  onChange={(e) => setUserName(e.target.value)}
-                  value={"Debabrata Saha" || " "}
+                  onChange={handleNameChange}
+                  value={user.name}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:  dark: "
                   placeholder="Shuvo Saha"
                   required
@@ -97,8 +141,8 @@ const ServiceDetail = () => {
                 <input
                   type="email"
                   id="user_email"
-                  onChange={(e) => setUserEmail(e.target.value)}
-                  value={"sahadebabrata570@gmail.com" || " "}
+                  onChange={handleEmailChange}
+                  value={user.email}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white "
                   placeholder="shuvo@gmail.com"
                   required
@@ -135,8 +179,8 @@ const ServiceDetail = () => {
                 <DatePicker
                   id="user_date"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white "
-                  selected={startDate}
-                  onChange={(date) => setStartDate(date)}
+                  selected={bookingDate}
+                  onChange={(date) => setBookingDate(date)}
                 ></DatePicker>
               </div>
 

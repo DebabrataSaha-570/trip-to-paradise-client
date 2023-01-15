@@ -9,11 +9,7 @@ const SingleServices = ({ service }) => {
   return (
     <div>
       <div className="bg-white shadow-lg border border-gray-200 rounded-lg max-w-sm dark:bg-gray-800 dark:border-gray-700">
-        <img
-          className="rounded-t-lg"
-          src={`data:image/png;base64,${image}`}
-          alt="travel_image"
-        />
+        <img className="rounded-t-lg" src={image} alt="travel_image" />
 
         <div className="p-5">
           <h5 className="text-gray-900 font-bold text-2xl tracking-tight mb-2 dark:text-white">
