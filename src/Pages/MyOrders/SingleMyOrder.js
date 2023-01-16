@@ -1,24 +1,14 @@
 import { format, parse } from "date-fns";
 import React from "react";
 
-const SingleMyOrder = ({ order }) => {
+const SingleMyOrder = ({ order, handleCancel }) => {
   const { image, placeName, price, status } = order.service;
   const { _id, userName, userEmail, userPhone, userTicketNumber, bookingDate } =
     order;
 
-  const handleCancel = (id) => {
-    fetch(`http://localhost:5005/deleteOrder/${id}`, {
-      method: "DELETE",
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-      });
-  };
-
   return (
     <div>
-      <div className="bg-white shadow-lg border border-gray-200 rounded-lg max-w-[22rem] dark:bg-gray-800 dark:border-gray-700">
+      <div className="bg-white shadow-lg border border-gray-200 rounded-lg max-w-sm dark:bg-gray-800 dark:border-gray-700">
         <img className="rounded-t-lg" src={image} alt="travel_image" />
 
         <div className="p-5">
