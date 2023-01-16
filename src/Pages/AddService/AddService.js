@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { toast } from "react-toastify";
 import Footer from "../Shared/Footer/Footer";
 import Navigation from "../Shared/Navigation/Navigation";
 
@@ -16,7 +17,7 @@ const AddService = () => {
     e.preventDefault();
 
     if (!image) {
-      return alert("Please insert an image!!");
+      return alert("Please add an image!");
     }
     const formData = new FormData();
     formData.append("image", image);
@@ -50,7 +51,16 @@ const AddService = () => {
             .then((res) => res.json())
             .then((data) => {
               if (data.insertedId) {
-                alert("Service added successfully");
+                toast.success("Service added successfully!", {
+                  position: "bottom-left",
+                  autoClose: 5000,
+                  hideProgressBar: false,
+                  closeOnClick: true,
+                  pauseOnHover: true,
+                  draggable: true,
+                  progress: undefined,
+                  theme: "colored",
+                });
                 e.target.reset();
               }
             })
@@ -58,7 +68,16 @@ const AddService = () => {
               console.log(error);
             });
         } else {
-          console.log("imgbb image couldnt upload");
+          toast.error("imageBB image couldn't upload", {
+            position: "bottom-left",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
         }
       });
   };
