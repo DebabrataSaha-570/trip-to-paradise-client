@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 
 const SingleServices = ({ service }) => {
   const { placeName, placeDescription, price, image, _id } = service;
-  console.log("service", service);
   return (
     <div>
       <div className="bg-white shadow-lg border border-gray-200 rounded-lg max-w-sm dark:bg-gray-800 dark:border-gray-700">
