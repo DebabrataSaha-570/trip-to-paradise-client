@@ -1,5 +1,7 @@
-import { format } from "date-fns";
 import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { format } from "date-fns";
 
 const SingleManageOrder = ({ order }) => {
   const { userName, userEmail, bookingDate, userTicketNumber } = order;
@@ -51,14 +53,10 @@ const SingleManageOrder = ({ order }) => {
         <span className="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">
           Actions
         </span>
-        <a href="/" className="text-blue-400 hover:text-blue-600 underline">
-          Edit
-        </a>
-        <a
-          href="/"
-          className="text-blue-400 hover:text-blue-600 underline pl-6"
-        >
-          Remove
+        <button className=" rounded py-1 px-3 bg-red-400">Approve</button>
+
+        <a href="/" className="text-red-400 pl-6">
+          <FontAwesomeIcon icon={faTrash} />
         </a>
       </td>
     </tr>
