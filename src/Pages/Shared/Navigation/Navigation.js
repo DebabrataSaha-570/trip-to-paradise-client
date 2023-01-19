@@ -104,18 +104,18 @@ const Navigation = () => {
             </li>
           </ul>
 
-          <a
+          <Link
             className="hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-gray-300 hover:bg-gray-400 text-sm text-gray-900 font-bold  rounded-xl transition duration-200"
-            href="/"
+            to="/logIn"
           >
-            Sign In
-          </a>
-          <a
+            Log In
+          </Link>
+          <Link
             className="hidden lg:inline-block py-2 px-6 bg-[#CBAB71] hover:bg-[#C29D59] text-sm text-white font-bold rounded-xl transition duration-200"
-            href="/"
+            to="/signUp"
           >
             Sign up
-          </a>
+          </Link>
         </nav>
       </div>
 
