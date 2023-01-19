@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { ColorRing } from "react-loader-spinner";
+import { toast } from "react-toastify";
 import Footer from "../Shared/Footer/Footer";
 import Navigation from "../Shared/Navigation/Navigation";
 import SingleMyOrder from "./SingleMyOrder";
@@ -24,8 +25,16 @@ const MyOrders = () => {
         .then((res) => res.json())
         .then((data) => {
           if (data.deletedCount) {
-            console.log("myOrder", myOrder);
-            alert("Your Order deleted successfully");
+            toast.success("Order deleted successfully!", {
+              position: "bottom-left",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "colored",
+            });
             const newOrders = myOrder.filter((order) => order._id !== id);
             setMyOrder(newOrders);
           }

@@ -37,7 +37,6 @@ const AddService = () => {
             placeDuration,
             price,
             dressCode,
-            status: "pending",
             image: imgData.data.url,
           };
 

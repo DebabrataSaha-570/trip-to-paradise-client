@@ -22,7 +22,7 @@ const ServiceDetail = () => {
     fetch(`http://localhost:5005/service/${id}`)
       .then((res) => res.json())
       .then((data) => setService(data));
-  }, []);
+  }, [id]);
 
   const handleNameChange = (e) => {
     const updatedName = e.target.value;
@@ -56,6 +56,7 @@ const ServiceDetail = () => {
       userPhone,
       userTicketNumber,
       bookingDate,
+      status: "pending",
       service,
     };
 

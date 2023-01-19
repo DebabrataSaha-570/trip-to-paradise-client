@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { ColorRing } from "react-loader-spinner";
+import { toast } from "react-toastify";
 import Footer from "../Shared/Footer/Footer";
 import Navigation from "../Shared/Navigation/Navigation";
 import SingleManageOrder from "./SingleManageOrder";
@@ -14,6 +15,64 @@ const ManageOrders = () => {
         setOrders(data);
       });
   }, []);
+
+  const handleDelete = (id) => {
+    const success = window.confirm("Are you sure, you want to delete this?");
+    if (success) {
+      fetch(`http://localhost:5005/deleteOrder/${id}`, {
+        method: "DELETE",
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.deletedCount) {
+            toast.success("Order deleted successfully!", {
+              position: "bottom-left",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "colored",
+            });
+            const remainingOrders = orders.filter((order) => order._id !== id);
+            setOrders(remainingOrders);
+          }
+        });
+    }
+  };
+
+  const handleApproved = (id) => {
+    fetch(`http://localhost:5005/order/${id}`, {
+      method: "PUT",
+      body: JSON.stringify({ status: "approved" }),
+      headers: {
+        "Content-type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.modifiedCount) {
+          toast.success("Order approved successfully!", {
+            position: "bottom-left",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
+
+          fetch("http://localhost:5005/orders")
+            .then((res) => res.json())
+            .then((data) => {
+              setOrders(data);
+            });
+        }
+      });
+  };
+
   return (
     <>
       <Navigation></Navigation>
@@ -54,6 +113,8 @@ const ManageOrders = () => {
                   <SingleManageOrder
                     key={order._id}
                     order={order}
+                    handleDelete={handleDelete}
+                    handleApproved={handleApproved}
                   ></SingleManageOrder>
                 ))}
               </tbody>
