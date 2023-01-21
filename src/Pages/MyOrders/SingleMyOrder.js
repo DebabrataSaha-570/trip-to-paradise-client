@@ -1,4 +1,4 @@
-import { format, parse } from "date-fns";
+import { format } from "date-fns";
 import React from "react";
 
 const SingleMyOrder = ({ order, handleCancel }) => {

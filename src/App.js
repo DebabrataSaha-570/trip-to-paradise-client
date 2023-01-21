@@ -10,28 +10,31 @@ import ContactUs from "./Pages/ContactUs/ContactUs";
 import ServiceDetail from "./Pages/ServiceDetail/ServiceDetail";
 import LogIn from "./Pages/LogIn/LogIn";
 import SignUp from "./Pages/SignUp/SignUp";
+import AuthProvider from "./context/AuthProvider";
 
 function App() {
   return (
     <div className="">
-      <Routes>
-        <Route path="/" element={<Home></Home>}></Route>
-        <Route path="/home" element={<Home></Home>}></Route>
-        <Route path="/myOrders" element={<MyOrders></MyOrders>}></Route>
-        <Route path="/logIn" element={<LogIn></LogIn>}></Route>
-        <Route path="/signUp" element={<SignUp></SignUp>}></Route>
-        <Route
-          path="/manageOrders"
-          element={<ManageOrders></ManageOrders>}
-        ></Route>
-        <Route path="/addService" element={<AddService></AddService>}></Route>
-        <Route
-          path="/serviceDetail/:id"
-          element={<ServiceDetail></ServiceDetail>}
-        ></Route>
-        <Route path="/contactUs" element={<ContactUs></ContactUs>}></Route>
-        <Route path="*" element={<NotFound></NotFound>}></Route>
-      </Routes>
+      <AuthProvider>
+        <Routes>
+          <Route path="/" element={<Home></Home>}></Route>
+          <Route path="/home" element={<Home></Home>}></Route>
+          <Route path="/myOrders" element={<MyOrders></MyOrders>}></Route>
+          <Route path="/logIn" element={<LogIn></LogIn>}></Route>
+          <Route path="/signUp" element={<SignUp></SignUp>}></Route>
+          <Route
+            path="/manageOrders"
+            element={<ManageOrders></ManageOrders>}
+          ></Route>
+          <Route path="/addService" element={<AddService></AddService>}></Route>
+          <Route
+            path="/serviceDetail/:id"
+            element={<ServiceDetail></ServiceDetail>}
+          ></Route>
+          <Route path="/contactUs" element={<ContactUs></ContactUs>}></Route>
+          <Route path="*" element={<NotFound></NotFound>}></Route>
+        </Routes>
+      </AuthProvider>
       <ToastContainer />
     </div>
   );

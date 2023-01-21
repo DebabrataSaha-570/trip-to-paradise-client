@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import Footer from "../Shared/Footer/Footer";
 import Navigation from "../Shared/Navigation/Navigation";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../context/AuthProvider";
 const SignUp = () => {
   const {
     register,
@@ -10,11 +11,16 @@ const SignUp = () => {
     watch,
     formState: { errors },
   } = useForm();
-
-  const handleLogin = (data) => {
+  const { createUser } = useContext(AuthContext);
+  const handleSignUp = (data) => {
     console.log(data);
+    createUser(data.email, data.password)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+      })
+      .catch((error) => console.log(error));
   };
-  console.log(watch("example"));
 
   return (
     <>
@@ -32,7 +38,7 @@ const SignUp = () => {
             <span>Login with Google</span>
           </button>
         </div>
-        <form action="" className="my-10" onSubmit={handleSubmit(handleLogin)}>
+        <form action="" className="my-10" onSubmit={handleSubmit(handleSignUp)}>
           <div className="flex flex-col space-y-5">
             <label for="name">
               <p className="font-medium text-slate-700 pb-2">Name</p>
@@ -70,9 +76,9 @@ const SignUp = () => {
                     message: "Password must be 6 characters or longer ",
                   },
                   pattern: {
-                    value:
-                      /^(?=.*[A-Z].*[A-Z])(?=.*[!@#$&*])(?=.*[0-9].*[0-9])(?=.*[a-z].*[a-z].*[a-z]).{8}$/,
-                    message: "Password must be strong",
+                    value: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])/,
+                    message:
+                      "Password must be strong(One Capital,One special,One number)",
                   },
                 })}
                 id="password"

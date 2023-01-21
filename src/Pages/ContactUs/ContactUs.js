@@ -1,25 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import Footer from "../Shared/Footer/Footer";
 import Navigation from "../Shared/Navigation/Navigation";
 
 const ContactUs = () => {
-  // const [data, setData] = useState([]);
-
-  // useEffect(() => {
-  //   fetch("http://localhost:5005/services")
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setData(data);
-  //     });
-  // }, []);
   return (
     <div>
       <Navigation></Navigation>
-      {/* {data.map((d) => (
-        <div>
-          <h3>{d.placeName}</h3>
-          <img src={`data:image/png;base64,${d.image}`} alt="" />
-        </div>
-      ))} */}
+      <h3>This is contact us component</h3>
+      <Footer></Footer>
     </div>
   );
 };

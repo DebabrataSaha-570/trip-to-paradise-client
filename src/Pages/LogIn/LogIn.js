@@ -57,6 +57,11 @@ const LogIn = () => {
                     value: 6,
                     message: "Password must be 6 characters or longer",
                   },
+                  pattern: {
+                    value: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])/,
+                    message:
+                      "Password must be strong(One Capital,One special,One number)",
+                  },
                 })}
                 id="password"
                 name="password"
