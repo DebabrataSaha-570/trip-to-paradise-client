@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import Footer from "../Shared/Footer/Footer";
 import Navigation from "../Shared/Navigation/Navigation";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../context/AuthProvider";
+import { useState } from "react";
 
 const LogIn = () => {
   const {
@@ -11,11 +13,23 @@ const LogIn = () => {
     watch,
     formState: { errors },
   } = useForm();
+  const { signIn } = useContext(AuthContext);
+  const [loginError, setLoginError] = useState("");
 
   const handleLogin = (data) => {
     console.log(data);
+    setLoginError("");
+    signIn(data.email, data.password)
+      .then((res) => {
+        const user = res.user;
+        console.log("user", user);
+        setLoginError("");
+      })
+      .catch((error) => {
+        console.log("error", error.message);
+        setLoginError(error.message);
+      });
   };
-  console.log(watch("example"));
   return (
     <>
       <Navigation></Navigation>
@@ -88,6 +102,10 @@ const LogIn = () => {
                   Forgot Password?
                 </a>
               </div>
+            </div>
+            {/* error message */}
+            <div>
+              {loginError && <span className="text-red-500">{loginError}</span>}
             </div>
             <button
               type="submit"

@@ -5,11 +5,13 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../../context/AuthProvider";
 
 const Navigation = () => {
   const [nav, setNav] = useState(false);
+  const { user } = useContext(AuthContext);
 
   const handleClick = () => {
     setNav(!nav);
@@ -104,18 +106,18 @@ const Navigation = () => {
             </li>
           </ul>
 
-          <Link
-            className="hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-gray-300 hover:bg-gray-400 text-sm text-gray-900 font-bold  rounded-xl transition duration-200"
-            to="/logIn"
-          >
-            Log In
-          </Link>
-          <Link
-            className="hidden lg:inline-block py-2 px-6 bg-[#CBAB71] hover:bg-[#C29D59] text-sm text-white font-bold rounded-xl transition duration-200"
-            to="/signUp"
-          >
-            Sign up
-          </Link>
+          {user?.uid ? (
+            <button className="hidden lg:inline-block py-2 px-6 bg-gray-300 hover:bg-gray-400 text-sm  font-bold rounded-xl transition duration-200">
+              Sign Out
+            </button>
+          ) : (
+            <Link
+              className="hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-[#CBAB71] hover:bg-[#C29D59] text-sm text-white font-bold  rounded-xl transition duration-200"
+              to="/login"
+            >
+              Log In
+            </Link>
+          )}
         </nav>
       </div>
 
@@ -192,22 +194,25 @@ const Navigation = () => {
 
           <div className="mt-auto">
             <div className="pt-6">
-              <a
+              {/* <a
                 className="block px-4 py-3 mb-3 leading-loose text-xs text-center font-semibold leading-none bg-gray-300 hover:bg-gray-400 rounded-xl"
                 href="/"
               >
                 Sign in
-              </a>
-              <a
-                className="block px-4 py-3 mb-2 leading-loose text-xs text-center text-white font-semibold bg-[#CBAB71] hover:bg-[#C29D59]  rounded-xl"
-                href="/"
-              >
-                Sign Up
-              </a>
+              </a> */}
+              {user?.uid ? (
+                <button className="w-full px-4 py-3 mb-2 leading-loose text-xs text-center font-semibold bg-gray-300 hover:bg-gray-400  rounded-xl">
+                  Sign Out
+                </button>
+              ) : (
+                <Link
+                  className="block px-4 py-3 mb-2 leading-loose text-xs text-center text-white font-semibold bg-[#CBAB71] hover:bg-[#C29D59]  rounded-xl"
+                  to="/login"
+                >
+                  Login
+                </Link>
+              )}
             </div>
-            <p className="my-4 text-xs text-center text-gray-400">
-              <span>Copyright © 2021</span>
-            </p>
           </div>
         </nav>
       </div>
