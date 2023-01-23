@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import Footer from "../Shared/Footer/Footer";
 import Navigation from "../Shared/Navigation/Navigation";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthProvider";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSignIn } from "@fortawesome/free-solid-svg-icons";
@@ -14,8 +14,25 @@ const SignUp = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const { createUser, updateUser } = useContext(AuthContext);
+  const { createUser, updateUser, googleSignIn } = useContext(AuthContext);
   const [signUpError, setSignUpError] = useState("");
+  const location = useLocation();
+  const navigate = useNavigate();
+  let from = location.state?.from?.pathname || "/";
+
+  // google login
+  const handleGoogleLogin = () => {
+    googleSignIn()
+      .then((res) => {
+        const user = res.user;
+        console.log("googleUser", user);
+        navigate(from, { replace: true });
+      })
+      .catch((err) => {
+        console.log("error", err.message);
+        setSignUpError(err.message);
+      });
+  };
 
   const handleSignUp = (data) => {
     console.log(data);
@@ -24,6 +41,7 @@ const SignUp = () => {
       .then((result) => {
         const user = result.user;
         console.log(user);
+        // react toast
         toast.success("User created successfully!", {
           position: "bottom-left",
           autoClose: 5000,
@@ -54,7 +72,10 @@ const SignUp = () => {
         <h1 className="text-4xl font-medium">Sign Up</h1>
 
         <div className="my-5">
-          <button className="w-full text-center py-3 my-3 border flex space-x-2 items-center justify-center border-slate-200 rounded-lg text-slate-700 hover:border-slate-400 hover:text-slate-900 hover:shadow transition duration-150">
+          <button
+            onClick={handleGoogleLogin}
+            className="w-full text-center py-3 my-3 border flex space-x-2 items-center justify-center border-slate-200 rounded-lg text-slate-700 hover:border-slate-400 hover:text-slate-900 hover:shadow transition duration-150"
+          >
             <img
               src="https://www.svgrepo.com/show/355037/google.svg"
               className="w-6 h-6"

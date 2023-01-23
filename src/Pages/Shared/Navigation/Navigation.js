@@ -126,19 +126,19 @@ const Navigation = () => {
               <FontAwesomeIcon icon={faEllipsisVertical} />
             </li>
 
-            <li>
+            {/* <li>
               <Link
                 to="/home"
                 className="text-sm text-gray-400 hover:text-gray-500"
               >
                 Reviews
               </Link>
-            </li>
+            </li> */}
 
             {/* three dot icon  */}
-            <li className="text-gray-300">
+            {/* <li className="text-gray-300">
               <FontAwesomeIcon icon={faEllipsisVertical} />
-            </li>
+            </li> */}
 
             <li>
               <Link
@@ -150,21 +150,27 @@ const Navigation = () => {
             </li>
           </ul>
 
-          {user?.uid ? (
-            <button
-              onClick={handleLogOut}
-              className="hidden lg:inline-block py-2 px-6 bg-gray-300 hover:bg-gray-400 text-sm  font-bold rounded-xl transition duration-200"
-            >
-              Sign Out
-            </button>
-          ) : (
-            <Link
-              className="hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-[#CBAB71] hover:bg-[#C29D59] text-sm text-white font-bold  rounded-xl transition duration-200"
-              to="/login"
-            >
-              Log In
-            </Link>
-          )}
+          <div className="hidden lg:inline-block">
+            <span className="hidden lg:inline-block text-sm pr-2 text-gray-400 ">
+              {user?.displayName}
+            </span>
+
+            {user?.uid ? (
+              <button
+                onClick={handleLogOut}
+                className="hidden lg:inline-block py-2 px-6 bg-gray-300 hover:bg-gray-400 text-sm  font-bold rounded-xl transition duration-200"
+              >
+                Sign Out
+              </button>
+            ) : (
+              <Link
+                className="hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-[#CBAB71] hover:bg-[#C29D59] text-sm text-white font-bold  rounded-xl transition duration-200"
+                to="/login"
+              >
+                Log In
+              </Link>
+            )}
+          </div>
         </nav>
       </div>
 

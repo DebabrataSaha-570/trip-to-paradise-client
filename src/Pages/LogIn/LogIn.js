@@ -15,12 +15,26 @@ const LogIn = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const { signIn } = useContext(AuthContext);
+  const { signIn, googleSignIn } = useContext(AuthContext);
   const [loginError, setLoginError] = useState("");
   const location = useLocation();
   const navigate = useNavigate();
 
   let from = location.state?.from?.pathname || "/";
+
+  // google login
+  const handleGoogleLogin = () => {
+    googleSignIn()
+      .then((res) => {
+        const user = res.user;
+        console.log("googleUser", user);
+        navigate(from, { replace: true });
+      })
+      .catch((err) => {
+        console.log("error", err.message);
+        setLoginError(err.message);
+      });
+  };
 
   const handleLogin = (data) => {
     console.log(data);
@@ -54,7 +68,10 @@ const LogIn = () => {
         <p className="text-slate-500">Hi, Welcome back 👋</p>
 
         <div className="my-5">
-          <button className="w-full text-center py-3 my-3 border flex space-x-2 items-center justify-center border-slate-200 rounded-lg text-slate-700 hover:border-slate-400 hover:text-slate-900 hover:shadow transition duration-150">
+          <button
+            onClick={handleGoogleLogin}
+            className="w-full text-center py-3 my-3 border flex space-x-2 items-center justify-center border-slate-200 rounded-lg text-slate-700 hover:border-slate-400 hover:text-slate-900 hover:shadow transition duration-150"
+          >
             <img
               src="https://www.svgrepo.com/show/355037/google.svg"
               className="w-6 h-6"

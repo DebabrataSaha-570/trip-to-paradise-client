@@ -1,6 +1,8 @@
 import React, { createContext, useState } from "react";
 import {
   createUserWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup,
   getAuth,
   onAuthStateChanged,
   signInWithEmailAndPassword,
@@ -21,6 +23,11 @@ const AuthProvider = ({ children }) => {
     setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
+  const googleSignIn = () => {
+    const provider = new GoogleAuthProvider();
+    return signInWithPopup(auth, provider);
+  };
+
   const signIn = (email, password) => {
     setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
@@ -47,6 +54,7 @@ const AuthProvider = ({ children }) => {
     createUser,
     signIn,
     updateUser,
+    googleSignIn,
     logOut,
     user,
     loading,
