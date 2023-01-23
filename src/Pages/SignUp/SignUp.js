@@ -1,31 +1,56 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import Footer from "../Shared/Footer/Footer";
 import Navigation from "../Shared/Navigation/Navigation";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthProvider";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSignIn } from "@fortawesome/free-solid-svg-icons";
+import { toast } from "react-toastify";
+
 const SignUp = () => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm();
-  const { createUser } = useContext(AuthContext);
+  const { createUser, updateUser } = useContext(AuthContext);
+  const [signUpError, setSignUpError] = useState("");
+
   const handleSignUp = (data) => {
     console.log(data);
+    setSignUpError("");
     createUser(data.email, data.password)
       .then((result) => {
         const user = result.user;
         console.log(user);
+        toast.success("User created successfully!", {
+          position: "bottom-left",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
+        const userInfo = {
+          displayName: data?.name,
+        };
+        updateUser(userInfo)
+          .then(() => {})
+          .catch((err) => console.log(err));
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        console.log(error);
+        setSignUpError(error.message);
+      });
   };
 
   return (
     <>
       <Navigation></Navigation>
-      <div className="max-w-lg mx-auto my-10 bg-white p-8 rounded-xl shadow shadow-slate-300">
+      <div className="max-w-lg mx-auto my-10 bg-white p-8 rounded-xl shadow-md shadow-slate-300">
         <h1 className="text-4xl font-medium">Sign Up</h1>
 
         <div className="my-5">
@@ -96,59 +121,34 @@ const SignUp = () => {
                   <input
                     type="checkbox"
                     id="remember"
-                    className="w-4 mx-2 h-4 border-slate-200 focus:bg-indigo-600"
+                    className="w-4 mx-2 h-4 border-slate-200"
                   />
                   Remember me
                 </label>
               </div>
               <div>
-                <a href="/" className="font-medium text-indigo-600">
+                <a href="/" className="font-medium text-[#887043]">
                   Forgot Password?
                 </a>
               </div>
             </div>
+            {signUpError && <span className="text-red-500">{signUpError}</span>}
             <button
               type="submit"
-              className="w-full py-3 font-medium text-white bg-indigo-600 hover:bg-indigo-500 rounded-lg border-indigo-500 hover:shadow inline-flex space-x-2 items-center justify-center"
+              className="w-full py-3 font-medium text-white bg-[#C29D59] hover:bg-[#CBAB71]  rounded-lg border-indigo-500 hover:shadow inline-flex space-x-2 items-center justify-center"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"
-                />
-              </svg>
               <span>Sign Up</span>
+              <FontAwesomeIcon icon={faSignIn} />
             </button>
             <p className="text-center">
               Already registered ?{" "}
               <Link
                 to="/login"
-                className="text-indigo-600 font-medium inline-flex space-x-1 items-center"
+                className="text-[#887043] font-medium inline-flex space-x-1 items-center"
               >
                 <span>Please Login </span>
                 <span>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-4 w-4"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    stroke-width="2"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                    />
-                  </svg>
+                  <FontAwesomeIcon icon={faSignIn} />
                 </span>
               </Link>
             </p>

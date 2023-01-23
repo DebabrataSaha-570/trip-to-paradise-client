@@ -11,10 +11,15 @@ import { AuthContext } from "../../../context/AuthProvider";
 
 const Navigation = () => {
   const [nav, setNav] = useState(false);
-  const { user } = useContext(AuthContext);
+  const { user, logOut } = useContext(AuthContext);
 
   const handleClick = () => {
     setNav(!nav);
+  };
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {})
+      .catch((err) => console.log(err));
   };
   return (
     <>
@@ -39,7 +44,7 @@ const Navigation = () => {
             </button>
           </div>
 
-          <ul className="hidden absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 lg:flex lg:mx-auto  lg:items-center lg:w-auto lg:space-x-6">
+          <ul className="hidden absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 lg:flex lg:mx-auto  lg:items-center lg:w-auto lg:space-x-3">
             <li>
               <Link
                 to="/home"
@@ -54,12 +59,65 @@ const Navigation = () => {
               <FontAwesomeIcon icon={faEllipsisVertical} />
             </li>
 
+            {user?.uid && (
+              <li>
+                <Link
+                  to="/myOrders"
+                  className="text-sm text-gray-400 hover:text-gray-500"
+                >
+                  My Orders
+                </Link>
+              </li>
+            )}
+
+            {user?.uid && (
+              <li className="text-gray-300">
+                <FontAwesomeIcon icon={faEllipsisVertical} />
+              </li>
+            )}
+
+            {user?.uid && (
+              <li>
+                <Link
+                  className="text-sm text-gray-400 hover:text-gray-500"
+                  to="/manageOrders"
+                >
+                  Manage Orders
+                </Link>
+              </li>
+            )}
+
+            {/* three dot icon  */}
+            {user?.uid && (
+              <li className="text-gray-300">
+                <FontAwesomeIcon icon={faEllipsisVertical} />
+              </li>
+            )}
+
+            {user?.uid && (
+              <li>
+                <Link
+                  to="/addService"
+                  className="text-sm text-gray-400 hover:text-gray-500"
+                >
+                  Add Service
+                </Link>
+              </li>
+            )}
+
+            {/* three dot icon  */}
+            {user?.uid && (
+              <li className="text-gray-300">
+                <FontAwesomeIcon icon={faEllipsisVertical} />
+              </li>
+            )}
+
             <li>
               <Link
-                to="/myOrders"
+                to="/home"
                 className="text-sm text-gray-400 hover:text-gray-500"
               >
-                My Orders
+                Blogs
               </Link>
             </li>
 
@@ -70,24 +128,10 @@ const Navigation = () => {
 
             <li>
               <Link
-                className="text-sm text-gray-400 hover:text-gray-500"
-                to="/manageOrders"
-              >
-                Manage Orders
-              </Link>
-            </li>
-
-            {/* three dot icon  */}
-            <li className="text-gray-300">
-              <FontAwesomeIcon icon={faEllipsisVertical} />
-            </li>
-
-            <li>
-              <Link
-                to="/addService"
+                to="/home"
                 className="text-sm text-gray-400 hover:text-gray-500"
               >
-                Add Service
+                Reviews
               </Link>
             </li>
 
@@ -107,7 +151,10 @@ const Navigation = () => {
           </ul>
 
           {user?.uid ? (
-            <button className="hidden lg:inline-block py-2 px-6 bg-gray-300 hover:bg-gray-400 text-sm  font-bold rounded-xl transition duration-200">
+            <button
+              onClick={handleLogOut}
+              className="hidden lg:inline-block py-2 px-6 bg-gray-300 hover:bg-gray-400 text-sm  font-bold rounded-xl transition duration-200"
+            >
               Sign Out
             </button>
           ) : (
@@ -156,28 +203,54 @@ const Navigation = () => {
                   Home
                 </Link>
               </li>
+              {user?.uid && (
+                <li className="mb-1">
+                  <Link
+                    to="/myOrders"
+                    className="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-[#C29D59] rounded"
+                  >
+                    My Orders
+                  </Link>
+                </li>
+              )}
+
+              {user?.uid && (
+                <li className="mb-1">
+                  <Link
+                    to="/manageOrders"
+                    className="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-[#C29D59] rounded"
+                  >
+                    Manage Orders
+                  </Link>
+                </li>
+              )}
+
+              {user?.uid && (
+                <li className="mb-1">
+                  <Link
+                    to="/addService"
+                    className="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-[#C29D59] rounded"
+                  >
+                    Add Service
+                  </Link>
+                </li>
+              )}
+
               <li className="mb-1">
                 <Link
-                  to="/myOrders"
+                  to="/contactUs"
                   className="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-[#C29D59] rounded"
                 >
-                  My Orders
+                  Blogs
                 </Link>
               </li>
+
               <li className="mb-1">
                 <Link
-                  to="/manageOrders"
+                  to="/contactUs"
                   className="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-[#C29D59] rounded"
                 >
-                  Manage Orders
-                </Link>
-              </li>
-              <li className="mb-1">
-                <Link
-                  to="/addService"
-                  className="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-[#C29D59] rounded"
-                >
-                  Add Service
+                  Reviews
                 </Link>
               </li>
 
@@ -194,14 +267,11 @@ const Navigation = () => {
 
           <div className="mt-auto">
             <div className="pt-6">
-              {/* <a
-                className="block px-4 py-3 mb-3 leading-loose text-xs text-center font-semibold leading-none bg-gray-300 hover:bg-gray-400 rounded-xl"
-                href="/"
-              >
-                Sign in
-              </a> */}
               {user?.uid ? (
-                <button className="w-full px-4 py-3 mb-2 leading-loose text-xs text-center font-semibold bg-gray-300 hover:bg-gray-400  rounded-xl">
+                <button
+                  onClick={handleLogOut}
+                  className="w-full px-4 py-3 mb-2 leading-loose text-xs text-center font-semibold bg-gray-300 hover:bg-gray-400  rounded-xl"
+                >
                   Sign Out
                 </button>
               ) : (

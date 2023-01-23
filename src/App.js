@@ -11,6 +11,7 @@ import ServiceDetail from "./Pages/ServiceDetail/ServiceDetail";
 import LogIn from "./Pages/LogIn/LogIn";
 import SignUp from "./Pages/SignUp/SignUp";
 import AuthProvider from "./context/AuthProvider";
+import PrivateRoute from "./Pages/PrivateRoute/PrivateRoute";
 
 function App() {
   return (
@@ -19,17 +20,39 @@ function App() {
         <Routes>
           <Route path="/" element={<Home></Home>}></Route>
           <Route path="/home" element={<Home></Home>}></Route>
-          <Route path="/myOrders" element={<MyOrders></MyOrders>}></Route>
           <Route path="/logIn" element={<LogIn></LogIn>}></Route>
           <Route path="/signUp" element={<SignUp></SignUp>}></Route>
           <Route
-            path="/manageOrders"
-            element={<ManageOrders></ManageOrders>}
+            path="/myOrders"
+            element={
+              <PrivateRoute>
+                <MyOrders></MyOrders>
+              </PrivateRoute>
+            }
           ></Route>
-          <Route path="/addService" element={<AddService></AddService>}></Route>
+          <Route
+            path="/manageOrders"
+            element={
+              <PrivateRoute>
+                <ManageOrders></ManageOrders>
+              </PrivateRoute>
+            }
+          ></Route>
+          <Route
+            path="/addService"
+            element={
+              <PrivateRoute>
+                <AddService></AddService>
+              </PrivateRoute>
+            }
+          ></Route>
           <Route
             path="/serviceDetail/:id"
-            element={<ServiceDetail></ServiceDetail>}
+            element={
+              <PrivateRoute>
+                <ServiceDetail></ServiceDetail>
+              </PrivateRoute>
+            }
           ></Route>
           <Route path="/contactUs" element={<ContactUs></ContactUs>}></Route>
           <Route path="*" element={<NotFound></NotFound>}></Route>
