@@ -15,7 +15,9 @@ const Gutter = () => {
             <FontAwesomeIcon size="2x" className="pr-5" icon={faGlobe} />
           </div>
           <div>
-            <h3 className="text-2xl font-medium">700+ DESTINATIONS</h3>
+            <h3 className="text-xl md:text-2xl font-medium">
+              700+ DESTINATIONS
+            </h3>
             <p>
               Far far away, behind the word mountains, far countries Vokalia.
             </p>
@@ -27,7 +29,9 @@ const Gutter = () => {
             <FontAwesomeIcon size="2x" className="pr-5" icon={faCheckCircle} />
           </div>
           <div>
-            <h3 className="text-2xl font-medium">BEST PRICE GUARANTEE</h3>
+            <h3 className="text-xl md:text-2xl font-medium">
+              BEST PRICE GUARANTEE
+            </h3>
             <p>
               Far far away, behind the word mountains, far countries Vokalia.
             </p>
@@ -38,7 +42,9 @@ const Gutter = () => {
             <FontAwesomeIcon size="2x" className="pr-5" icon={faHeadset} />
           </div>
           <div>
-            <h3 className="text-2xl font-medium">TOP NOTCH SUPPORT</h3>
+            <h3 className="text-xl md:text-2xl font-medium">
+              TOP NOTCH SUPPORT
+            </h3>
             <p>
               Far far away, behind the word mountains, far countries Vokalia.
             </p>

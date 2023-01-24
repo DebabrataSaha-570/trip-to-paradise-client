@@ -19,7 +19,7 @@ const Banner = () => {
         spaceBetween={30}
         centeredSlides={true}
         autoplay={{
-          delay: 2500,
+          delay: 4000,
           disableOnInteraction: false,
         }}
         pagination={{
@@ -31,7 +31,7 @@ const Banner = () => {
       >
         <SwiperSlide>
           <div>
-            <div className="bg-gradient-to-tr from-gray-400 to-gray-700 h-[35rem] w-full mx-auto relative z-0">
+            <div className="bg-gradient-to-tr from-gray-400 to-gray-700 h-[30rem] md:h[35rem] w-full mx-auto relative z-0">
               <img
                 src={image3}
                 alt=""
@@ -56,7 +56,7 @@ const Banner = () => {
         </SwiperSlide>
         <SwiperSlide>
           <div>
-            <div className="bg-gradient-to-tr from-gray-400 to-gray-700 h-[35rem] w-full mx-auto relative z-0">
+            <div className="bg-gradient-to-tr from-gray-400 to-gray-700 h-[30rem] md:h[35rem] w-full mx-auto relative z-0">
               <img
                 src={image1}
                 alt=""
@@ -81,7 +81,7 @@ const Banner = () => {
         </SwiperSlide>
         <SwiperSlide>
           <div>
-            <div className="bg-gradient-to-tr from-gray-400 to-gray-700 h-[35rem] w-full mx-auto relative z-0">
+            <div className="bg-gradient-to-tr from-gray-400 to-gray-700 h-[30rem] md:h[35rem] w-full mx-auto relative z-0">
               <img
                 src={image2}
                 alt=""
