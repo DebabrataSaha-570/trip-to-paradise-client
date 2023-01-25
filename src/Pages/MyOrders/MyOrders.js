@@ -1,20 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { ColorRing } from "react-loader-spinner";
 import { toast } from "react-toastify";
+import { AuthContext } from "../../context/AuthProvider";
 import Footer from "../Shared/Footer/Footer";
 import Navigation from "../Shared/Navigation/Navigation";
 import SingleMyOrder from "./SingleMyOrder";
 
 const MyOrders = () => {
+  const { user } = useContext(AuthContext);
   const [myOrder, setMyOrder] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5005/order/sahadebabrata570@gmail.com")
+    fetch(`http://localhost:5005/order/${user?.email}`)
       .then((res) => res.json())
       .then((data) => {
         setMyOrder(data);
       });
-  }, []);
+  }, [user?.email]);
 
   const handleCancel = (id) => {
     const confirm = window.confirm("Are you sure, you want to cancel this?");

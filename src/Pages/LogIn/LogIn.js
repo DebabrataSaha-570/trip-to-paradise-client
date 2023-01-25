@@ -82,7 +82,7 @@ const LogIn = () => {
         </div>
         <form action="" className="my-10" onSubmit={handleSubmit(handleLogin)}>
           <div className="flex flex-col space-y-5">
-            <label for="email">
+            <label htmlFor="email">
               <p className="font-medium text-slate-700 pb-2">Email address</p>
               <input
                 {...register("email", { required: "Email is required" })}
@@ -95,7 +95,7 @@ const LogIn = () => {
                 <span className="text-red-500">{errors.email?.message}</span>
               )}
             </label>
-            <label for="password">
+            <label htmlFor="password">
               <p className="font-medium text-slate-700 pb-2">Password</p>
               <input
                 {...register("password", {
@@ -121,7 +121,7 @@ const LogIn = () => {
             </label>
             <div className="flex flex-row justify-between">
               <div>
-                <label for="remember" className="">
+                <label htmlFor="remember" className="">
                   <input
                     type="checkbox"
                     id="remember"

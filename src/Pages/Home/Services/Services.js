@@ -11,11 +11,11 @@ const Services = () => {
       .then((data) => setServices(data));
   }, []);
   return (
-    <section className="max-w-7xl mx-auto p-10 md:p-0 my-5 md:my-10 ">
+    <section className="max-w-7xl mx-auto p-10 md:p-0 my-4 md:my-7 ">
       <h3 className="text-2xl md:text-3xl ">
         Trending, <span className="font-bold">Best Selling Tours</span> and
       </h3>
-      <h3 className="text-2xl md:text-3xl my-2">Fun Destinations</h3>
+      <h3 className="text-2xl md:text-3xl my-3">Fun Destinations</h3>
 
       {services.length > 0 ? (
         <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">

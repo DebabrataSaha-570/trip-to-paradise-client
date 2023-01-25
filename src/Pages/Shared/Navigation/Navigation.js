@@ -117,7 +117,7 @@ const Navigation = () => {
                 to="/home"
                 className="text-sm text-gray-400 hover:text-gray-500"
               >
-                Blogs
+                About Us
               </Link>
             </li>
 
@@ -125,20 +125,6 @@ const Navigation = () => {
             <li className="text-gray-300">
               <FontAwesomeIcon icon={faEllipsisVertical} />
             </li>
-
-            {/* <li>
-              <Link
-                to="/home"
-                className="text-sm text-gray-400 hover:text-gray-500"
-              >
-                Reviews
-              </Link>
-            </li> */}
-
-            {/* three dot icon  */}
-            {/* <li className="text-gray-300">
-              <FontAwesomeIcon icon={faEllipsisVertical} />
-            </li> */}
 
             <li>
               <Link
@@ -247,16 +233,7 @@ const Navigation = () => {
                   to="/contactUs"
                   className="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-[#C29D59] rounded"
                 >
-                  Blogs
-                </Link>
-              </li>
-
-              <li className="mb-1">
-                <Link
-                  to="/contactUs"
-                  className="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-[#C29D59] rounded"
-                >
-                  Reviews
+                  About Us
                 </Link>
               </li>
 
@@ -271,7 +248,7 @@ const Navigation = () => {
             </ul>
           </div>
 
-          <div className="mt-auto">
+          <div className="">
             <div className="pt-6">
               {user?.uid ? (
                 <button

@@ -20,7 +20,16 @@ const SingleManageOrder = ({ order, handleDelete, handleApproved }) => {
         <span className="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">
           Email
         </span>
-        {userEmail}
+        {userEmail.length > 27 ? (
+          <div className="group relative">
+            <span>{userEmail.slice(0, 22)}..</span>
+            <span className="pointer-events-none absolute -top-10 left-1/2 -translate-x-1/2 whitespace-nowrap rounded bg-black px-2 py-1 text-white opacity-0 transition before:absolute before:left-1/2 before:top-full before:-translate-x-1/2 before:border-4 before:border-transparent before:border-t-black before:content-[''] group-hover:opacity-100">
+              {userEmail}
+            </span>
+          </div>
+        ) : (
+          <span>{userEmail}</span>
+        )}
       </td>
 
       <td className="w-full lg:w-auto p-3 text-gray-800  border border-b text-center block lg:table-cell relative lg:static">
@@ -70,7 +79,7 @@ const SingleManageOrder = ({ order, handleDelete, handleApproved }) => {
         {status === "approved" && (
           <button
             type="button"
-            class="px-3 py-1 rounded bg-green-500 focus:outline-none disabled:opacity-25"
+            className="px-3 py-1 rounded bg-green-500 focus:outline-none disabled:opacity-25"
             disabled
           >
             Approve

@@ -1,17 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import Footer from "../Shared/Footer/Footer";
 import Navigation from "../Shared/Navigation/Navigation";
 import { ColorRing } from "react-loader-spinner";
 import { toast } from "react-toastify";
+import { AuthContext } from "../../context/AuthProvider";
 
 const ServiceDetail = () => {
   const { id } = useParams();
   const [service, setService] = useState({});
-  const [user, setUser] = useState({
-    name: "Debabrata Saha",
-    email: "sahadebabrata570@gmail.com",
+  const { user } = useContext(AuthContext);
+  const [bookingUser, setBookingUser] = useState({
+    name: user?.displayName,
+    email: user?.email,
   });
   const [userPhone, setUserPhone] = useState(0);
   const [userTicketNumber, setUserTicketNumber] = useState(0);
@@ -26,16 +28,16 @@ const ServiceDetail = () => {
 
   const handleNameChange = (e) => {
     const updatedName = e.target.value;
-    const updatedUser = { ...user };
+    const updatedUser = { ...bookingUser };
     updatedUser.name = updatedName;
-    setUser(updatedUser);
+    setBookingUser(updatedUser);
   };
 
   const handleEmailChange = (e) => {
     const updatedEmail = e.target.value;
-    const updatedUser = { ...user };
+    const updatedUser = { ...bookingUser };
     updatedUser.email = updatedEmail;
-    setUser(updatedUser);
+    setBookingUser(updatedUser);
   };
 
   const {
@@ -51,8 +53,8 @@ const ServiceDetail = () => {
     e.preventDefault();
 
     const booking = {
-      userName: user.name,
-      userEmail: user.email,
+      userName: bookingUser.name,
+      userEmail: bookingUser.email,
       userPhone,
       userTicketNumber,
       bookingDate,
@@ -101,7 +103,7 @@ const ServiceDetail = () => {
   return (
     <div>
       <Navigation></Navigation>
-      <section className="max-w-7xl mx-auto p-10 md:p-0 my-10">
+      <section className="max-w-7xl mx-auto p-7 md:p-0 my-10">
         {Object.keys(service).length > 0 ? (
           <section className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* service detail */}
@@ -113,30 +115,32 @@ const ServiceDetail = () => {
               <h2 className="text-3xl  my-3"> {placeName} </h2>
               <p>{placeDescription}</p>
 
-              <table class="border-collapse border my-3 border-black w-full">
+              <table className="border-collapse border my-3 border-black w-full">
                 <tbody>
                   <tr>
-                    <td class="border border-black p-2 font-bold">Price</td>
-                    <td class="border border-black p-2">${price}</td>
+                    <td className="border border-black p-2 font-bold">Price</td>
+                    <td className="border border-black p-2">${price}</td>
                   </tr>
                   <tr>
-                    <td class="border border-black p-2 font-bold">Duration</td>
-                    <td class="border border-black p-2">
+                    <td className="border border-black p-2 font-bold">
+                      Duration
+                    </td>
+                    <td className="border border-black p-2">
                       {placeDuration} Days
                     </td>
                   </tr>
                   <tr>
-                    <td class="border border-black p-2 font-bold">
+                    <td className="border border-black p-2 font-bold">
                       Dress Code
                     </td>
-                    <td class="border border-black p-2">{dressCode}</td>
+                    <td className="border border-black p-2">{dressCode}</td>
                   </tr>
                 </tbody>
               </table>
             </div>
 
             {/* service detail form */}
-            <div className="px-8 py-3 shadow-2xl h-[35rem] lg:ml-5">
+            <div className="px-5 md:px-8 py-3 shadow-2xl h-[35rem] lg:ml-5">
               <h3 className="text-center text-2xl font-semibold">
                 Book This Tour
               </h3>
@@ -145,7 +149,7 @@ const ServiceDetail = () => {
                 {/* user name input */}
                 <div>
                   <label
-                    for="user_name"
+                    htmlFor="user_name"
                     className="block mt-3 mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                   >
                     Name
@@ -154,7 +158,7 @@ const ServiceDetail = () => {
                     type="text"
                     id="user_name"
                     onChange={handleNameChange}
-                    value={user.name}
+                    value={bookingUser.name}
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:  dark: "
                     placeholder="Shuvo Saha"
                     required
@@ -164,7 +168,7 @@ const ServiceDetail = () => {
                 {/* Email Address */}
                 <div>
                   <label
-                    for="user_email"
+                    htmlFor="user_email"
                     className="block mt-3 mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                   >
                     Email Address
@@ -173,7 +177,7 @@ const ServiceDetail = () => {
                     type="email"
                     id="user_email"
                     onChange={handleEmailChange}
-                    value={user.email}
+                    value={bookingUser.email}
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white "
                     placeholder="shuvo@gmail.com"
                     required
@@ -183,7 +187,7 @@ const ServiceDetail = () => {
                 {/* Phone Number */}
                 <div>
                   <label
-                    for="user_phone"
+                    htmlFor="user_phone"
                     className="block mt-3 mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                   >
                     Phone Number
@@ -201,7 +205,7 @@ const ServiceDetail = () => {
                 {/* pick a date  */}
                 <div>
                   <label
-                    for="user_date"
+                    htmlFor="user_date"
                     className="block mt-3 mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                   >
                     Pick a Date
@@ -218,7 +222,7 @@ const ServiceDetail = () => {
                 {/* Number of Tickets */}
                 <div>
                   <label
-                    for="user_ticket_number"
+                    htmlFor="user_ticket_number"
                     className="block mt-3 mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                   >
                     Number of Tickets
@@ -249,7 +253,7 @@ const ServiceDetail = () => {
               width="80"
               ariaLabel="blocks-loading"
               wrapperStyle={{ display: "inline-block" }}
-              wrapperClass="blocks-wrapper"
+              wrapperclassName="blocks-wrapper"
               colors={["#b8c480", "#B2A3B5", "#F4442E", "#51E5FF", "#429EA6"]}
             />
           </div>

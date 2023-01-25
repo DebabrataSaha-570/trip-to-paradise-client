@@ -11,31 +11,31 @@ const Footer = () => {
   return (
     <div className="bg-[#2A2A2A]">
       <section className="max-w-7xl mx-auto  ">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 md:gap-14 py-10 px-10 md:px-10 lg:px-0">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-14 py-10 px-10 md:px-10 lg:px-0">
           {/* first part */}
           <div>
             <h1 className="text-3xl text-[#C29D59] font-medium my-4">
               Trip to Paradise
             </h1>
-            <p className="text-gray-100">
+            <div className="text-gray-100">
               Trip to Paradise sit amet consectetur adipisicing elit.
               Perferendis sapiente tenetur officiis explicabo fugit, sit
               mollitia eum atque excepturi quaerat autem.
-              <div class="flex items-stretch my-12 ">
+              <div className="flex items-stretch my-12 ">
                 <input
-                  class="bg-gray-100 rounded-lg rounded-r-none text-base leading-none text-gray-800 p-4 w-4/5 border-2  focus:outline-none focus:border-[#c29d59] "
+                  className="bg-gray-100 rounded-lg rounded-r-none text-base leading-none text-gray-800 p-4 w-4/5 border-2  focus:outline-none focus:border-[#c29d59] "
                   type="email"
                   placeholder="Your Email"
                 />
-                <button class="w-32 rounded-l-none bg-[#c29d59] hover:bg-[#CBAB71] rounded text-base font-medium leading-none text-white p-4 uppercase focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#c29d59] ">
+                <button className="w-32 rounded-l-none bg-[#c29d59] hover:bg-[#CBAB71] rounded text-base font-medium leading-none text-white p-4 uppercase focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#c29d59] ">
                   subscribe
                 </button>
               </div>
-            </p>
+            </div>
           </div>
           {/* second part  */}
           <div>
-            <h1 className="text-3xl text-gray-100 my-4">Navigation</h1>
+            <h1 className="text-3xl text-gray-100 my-2 md:my-4">Navigation</h1>
             <hr />
             <ul className="list-disc p-5 text-gray-400 space-y-4">
               <li className="hover:text-[#C29D59] ">
@@ -60,26 +60,26 @@ const Footer = () => {
           </div>
           {/* third part */}
           <div>
-            <h1 className="text-3xl text-gray-100 my-4">Need Help?</h1>
+            <h1 className="text-3xl text-gray-100 my-2 md:my-4">Need Help?</h1>
             <hr />
-            <div className="border-l-4 border-[#CBAB71] px-4 my-3">
+            <div className="border-l-4 border-[#CBAB71] px-4 my-4 md:my-3">
               <h5 className="text-gray-400 text-sm">Call Us</h5>
               <h3 className="text-gray-200 font-semibold">01623333333</h3>
             </div>
 
-            <div className="border-l-4 border-[#CBAB71] px-4 my-3">
+            <div className="border-l-4 border-[#CBAB71] px-4 my-4 md:my-3">
               <h5 className="text-gray-400 text-sm">Email for Us</h5>
               <h3 className="text-gray-200 font-semibold">
                 triptoparadise@gmail.com
               </h3>
             </div>
-            <div className="border-l-4 border-[#CBAB71] px-4 my-3">
+            <div className="border-l-4 border-[#CBAB71] px-4 my-4 md:my-3">
               <h5 className="text-gray-400 text-sm">Location</h5>
               <h3 className="text-gray-200 font-semibold">
                 221b Baker St, London
               </h3>
             </div>
-            <div className="border-l-4 border-[#CBAB71] px-4 my-3">
+            <div className="border-l-4 border-[#CBAB71] px-4 my-4 md:mt-3">
               <h5 className="text-gray-400 text-sm">Follow Us</h5>
 
               <div className="text-xl text-[#C29D59] space-x-4 mt-2">

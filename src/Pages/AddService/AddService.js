@@ -86,7 +86,7 @@ const AddService = () => {
       <Navigation></Navigation>
 
       <div className="max-w-2xl mx-auto bg-white   my-3">
-        <div className="bg-[#F3F4F6] p-16">
+        <div className="bg-[#F3F4F6] p-12 md:p-16">
           <h3 className="text-center text-2xl mb-3">Please Add a Service</h3>
 
           <form onSubmit={handleAddService}>
@@ -94,7 +94,7 @@ const AddService = () => {
               {/* place name input */}
               <div>
                 <label
-                  for="place_name"
+                  htmlFor="place_name"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                 >
                   Place name
@@ -112,7 +112,7 @@ const AddService = () => {
               {/* place description text area */}
               <div>
                 <label
-                  for="place_description"
+                  htmlFor="place_description"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                 >
                   Place Description
@@ -130,7 +130,7 @@ const AddService = () => {
               {/* duration text-input */}
               <div>
                 <label
-                  for="duration"
+                  htmlFor="duration"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                 >
                   Duration
@@ -148,7 +148,7 @@ const AddService = () => {
               {/* price text-input */}
               <div>
                 <label
-                  for="price"
+                  htmlFor="price"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                 >
                   Price
@@ -166,7 +166,7 @@ const AddService = () => {
               {/* dress code input  */}
               <div>
                 <label
-                  for="dress_code"
+                  htmlFor="dress_code"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                 >
                   Dress Code
@@ -184,8 +184,8 @@ const AddService = () => {
               {/* img upload url */}
               <div>
                 <label
-                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                  for="file_input"
+                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                  htmlFor="file_input"
                 >
                   Upload file
                 </label>
