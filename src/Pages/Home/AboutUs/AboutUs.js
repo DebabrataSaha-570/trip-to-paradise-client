@@ -2,7 +2,10 @@ import React from "react";
 
 const AboutUs = () => {
   return (
-    <section className="max-w-7xl mx-auto p-6 md:p-0 my-4 md:my-5 ">
+    <section
+      name="aboutUs"
+      className="max-w-7xl mx-auto p-6 md:p-0 my-4 md:my-5 "
+    >
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10 bg-[#F2F2F2] my-5 p-3">
         <img
           src="https://i.ibb.co/TR81WSR/glenn-carstens-peters-ZWD3-Dx6a-UJg-unsplash.jpg"

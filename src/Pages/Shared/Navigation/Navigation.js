@@ -9,6 +9,8 @@ import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../context/AuthProvider";
 
+import { Link as LinkScroll } from "react-scroll";
+
 const Navigation = () => {
   const [nav, setNav] = useState(false);
   const { user, logOut } = useContext(AuthContext);
@@ -113,12 +115,15 @@ const Navigation = () => {
             )}
 
             <li>
-              <Link
-                to="/home"
-                className="text-sm text-gray-400 hover:text-gray-500"
+              <LinkScroll
+                to="aboutUs"
+                smooth={true}
+                offset={-100}
+                duration={500}
+                className="text-sm text-gray-400 hover:text-gray-500 cursor-pointer"
               >
                 About Us
-              </Link>
+              </LinkScroll>
             </li>
 
             {/* three dot icon  */}
@@ -127,12 +132,15 @@ const Navigation = () => {
             </li>
 
             <li>
-              <Link
-                to="/contactUs"
-                className="text-sm text-gray-400 hover:text-gray-500"
+              <LinkScroll
+                to="contactUs"
+                smooth={true}
+                offset={-100}
+                duration={500}
+                className="text-sm text-gray-400 hover:text-gray-500 cursor-pointer"
               >
                 Contact Us
-              </Link>
+              </LinkScroll>
             </li>
           </ul>
 
