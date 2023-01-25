@@ -137,9 +137,21 @@ const Navigation = () => {
           </ul>
 
           <div className="hidden lg:inline-block">
-            <span className="hidden lg:inline-block text-sm pr-2 text-gray-400 ">
-              {user?.displayName}
-            </span>
+            {user?.displayName.length > 10 ? (
+              <div className="group relative hidden lg:inline-block">
+                <span className="hidden lg:inline-block text-sm pr-2 text-gray-400 ">
+                  {user?.displayName.slice(0, 10)}..
+                </span>
+
+                <span className="pointer-events-none absolute top-10 left-1/2 -translate-x-1/2 whitespace-nowrap rounded bg-black px-2 py-1 text-white opacity-0 transition before:absolute before:left-1/2 before:top-full before:-translate-x-1/2 before:border-4 before:border-transparent  before:content-[''] group-hover:opacity-100">
+                  {user?.displayName}
+                </span>
+              </div>
+            ) : (
+              <span className="hidden lg:inline-block text-sm pr-2 text-gray-400 ">
+                {user?.displayName}
+              </span>
+            )}
 
             {user?.uid ? (
               <button
