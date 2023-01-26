@@ -133,13 +133,13 @@ const Navigation = () => {
 
             <li>
               <LinkScroll
-                to="contactUs"
+                to="services"
                 smooth={true}
                 offset={-100}
                 duration={500}
                 className="text-sm text-gray-400 hover:text-gray-500 cursor-pointer"
               >
-                Contact Us
+                Services
               </LinkScroll>
             </li>
           </ul>
@@ -249,21 +249,27 @@ const Navigation = () => {
               )}
 
               <li className="mb-1">
-                <Link
-                  to="/contactUs"
+                <LinkScroll
+                  to="aboutUs"
+                  smooth={true}
+                  offset={-100}
+                  duration={500}
                   className="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-[#C29D59] rounded"
                 >
                   About Us
-                </Link>
+                </LinkScroll>
               </li>
 
               <li className="mb-1">
-                <Link
-                  to="/contactUs"
+                <LinkScroll
+                  to="services"
+                  smooth={true}
+                  offset={-100}
+                  duration={500}
                   className="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-[#C29D59] rounded"
                 >
-                  Contact Us
-                </Link>
+                  Services
+                </LinkScroll>
               </li>
             </ul>
           </div>

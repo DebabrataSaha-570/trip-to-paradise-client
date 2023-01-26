@@ -40,7 +40,7 @@ const AddService = () => {
             image: imgData.data.url,
           };
 
-          fetch("http://localhost:5005/services", {
+          fetch("https://trip-to-paradise-server.vercel.app/services", {
             method: "POST",
             body: JSON.stringify(data),
             headers: {

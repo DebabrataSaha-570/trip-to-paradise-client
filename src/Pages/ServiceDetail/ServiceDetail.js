@@ -21,7 +21,7 @@ const ServiceDetail = () => {
   let navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`http://localhost:5005/service/${id}`)
+    fetch(`https://trip-to-paradise-server.vercel.app/service/${id}`)
       .then((res) => res.json())
       .then((data) => setService(data));
   }, [id]);
@@ -62,7 +62,7 @@ const ServiceDetail = () => {
       service,
     };
 
-    fetch("http://localhost:5005/booking", {
+    fetch("https://trip-to-paradise-server.vercel.app/booking", {
       method: "POST",
       body: JSON.stringify(booking),
       headers: {

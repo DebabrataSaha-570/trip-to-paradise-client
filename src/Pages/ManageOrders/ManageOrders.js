@@ -9,7 +9,7 @@ const ManageOrders = () => {
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5005/orders")
+    fetch("https://trip-to-paradise-server.vercel.app/orders")
       .then((res) => res.json())
       .then((data) => {
         setOrders(data);
@@ -19,7 +19,7 @@ const ManageOrders = () => {
   const handleDelete = (id) => {
     const success = window.confirm("Are you sure, you want to delete this?");
     if (success) {
-      fetch(`http://localhost:5005/deleteOrder/${id}`, {
+      fetch(`https://trip-to-paradise-server.vercel.app/deleteOrder/${id}`, {
         method: "DELETE",
       })
         .then((res) => res.json())
@@ -43,7 +43,7 @@ const ManageOrders = () => {
   };
 
   const handleApproved = (id) => {
-    fetch(`http://localhost:5005/order/${id}`, {
+    fetch(`https://trip-to-paradise-server.vercel.app/order/${id}`, {
       method: "PUT",
       body: JSON.stringify({ status: "approved" }),
       headers: {
@@ -64,7 +64,7 @@ const ManageOrders = () => {
             theme: "colored",
           });
 
-          fetch("http://localhost:5005/orders")
+          fetch("https://trip-to-paradise-server.vercel.app/orders")
             .then((res) => res.json())
             .then((data) => {
               setOrders(data);

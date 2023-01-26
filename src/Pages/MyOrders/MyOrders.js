@@ -11,7 +11,7 @@ const MyOrders = () => {
   const [myOrder, setMyOrder] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:5005/order/${user?.email}`)
+    fetch(`https://trip-to-paradise-server.vercel.app/order/${user?.email}`)
       .then((res) => res.json())
       .then((data) => {
         setMyOrder(data);
@@ -21,7 +21,7 @@ const MyOrders = () => {
   const handleCancel = (id) => {
     const confirm = window.confirm("Are you sure, you want to cancel this?");
     if (confirm) {
-      fetch(`http://localhost:5005/deleteOrder/${id}`, {
+      fetch(`https://trip-to-paradise-server.vercel.app/deleteOrder/${id}`, {
         method: "DELETE",
       })
         .then((res) => res.json())

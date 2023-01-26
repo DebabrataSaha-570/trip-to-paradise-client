@@ -6,12 +6,15 @@ const Services = () => {
   const [services, setServices] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5005/services")
+    fetch("https://trip-to-paradise-server.vercel.app/services")
       .then((res) => res.json())
       .then((data) => setServices(data));
   }, []);
   return (
-    <section className="max-w-7xl mx-auto p-10 md:p-0 my-4 md:my-7 ">
+    <section
+      name="services"
+      className="max-w-7xl mx-auto p-10 md:p-0 my-4 md:my-7 "
+    >
       <h3 className="text-2xl md:text-3xl ">
         Trending, <span className="font-bold">Best Selling Tours</span> and
       </h3>
